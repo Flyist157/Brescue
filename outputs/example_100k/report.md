@@ -2,9 +2,9 @@
 
 ## Assumptions and configurable ambiguous rules
 
-- Rescue wager default: nonrefundable fee paid to replace the bust card.
-- A rescued win pays only the original hand wager; default net is +0.5 units.
-- A rescued push loses the Rescue fee; default net is -0.5 units.
+- Rescue wager default: live side wager paid on rescued wins.
+- A rescued win pays the original hand wager plus the Rescue wager; default net is +1.5 units.
+- A rescued push returns both live wagers; default net is 0.0 units.
 - Rescue is allowed on split hands but not after doubled hands by default.
 - The bust-causing card is exposed, removed from the hand, and discarded.
 - The replacement is the next physical card in the finite shoe.
@@ -37,8 +37,8 @@
   "rescue_cost": 0.5,
   "rescue_fee_base": "original",
   "rescue_on_split_aces": false,
-  "rescue_settlement_model": "nonrefundable_fee",
-  "rescued_win_pays_original_only": true,
+  "rescue_settlement_model": "live_side_wager",
+  "rescued_win_pays_original_only": false,
   "resplit_aces": false,
   "shoe_depletion_policy": "abort_round_and_reshuffle",
   "split_aces_receive_one_card": true,
@@ -55,18 +55,18 @@ Never Rescue house edge was 0.007395 over 100000 hands, within a broad plausible
 | Strategy | Hands | Player net | House edge vs initial | House edge vs action | Rescue attempts | Avg inc EV |
 |---|---:|---:|---:|---:|---:|---:|
 | never | 100000 | -739.5000 | 0.007395 | 0.006502 | 0 | 0.000000 |
-| always | 100000 | 654.0000 | -0.006540 | -0.005370 | 16029 | 0.059299 |
-| busted_total_22_to_22 | 100000 | -234.5000 | 0.002345 | 0.002019 | 4656 | 0.137027 |
-| busted_total_22_to_23 | 100000 | 338.0000 | -0.003380 | -0.002864 | 8260 | 0.101695 |
-| busted_total_22_to_24 | 100000 | 549.5000 | -0.005495 | -0.004598 | 11393 | 0.083077 |
-| best_busted_total_threshold_busted_total_22_to_25 | 100000 | 677.5000 | -0.006775 | -0.005606 | 14048 | 0.077022 |
-| busted_total_22_to_26 | 100000 | 654.0000 | -0.006540 | -0.005370 | 16029 | 0.059299 |
-| busted_total_22_to_27 | 100000 | 654.0000 | -0.006540 | -0.005370 | 16029 | 0.059299 |
-| busted_total_22_to_28 | 100000 | 654.0000 | -0.006540 | -0.005370 | 16029 | 0.059299 |
-| busted_total_22_to_29 | 100000 | 654.0000 | -0.006540 | -0.005370 | 16029 | 0.059299 |
-| busted_total_22_to_30 | 100000 | 654.0000 | -0.006540 | -0.005370 | 16029 | 0.059299 |
-| learned_busted_total_dealer | 100000 | 628.5000 | -0.006285 | -0.005255 | 11973 | 0.088324 |
-| empirical_full_visible | 100000 | 554.0000 | -0.005540 | -0.004781 | 4322 | 0.130032 |
+| always | 100000 | 5136.5000 | -0.051365 | -0.042179 | 16029 | 0.338948 |
+| busted_total_22_to_22 | 100000 | 1248.5000 | -0.012485 | -0.010749 | 4656 | 0.455541 |
+| busted_total_22_to_23 | 100000 | 2823.0000 | -0.028230 | -0.023922 | 8260 | 0.402542 |
+| busted_total_22_to_24 | 100000 | 3871.0000 | -0.038710 | -0.032393 | 11393 | 0.374616 |
+| busted_total_22_to_25 | 100000 | 4730.5000 | -0.047305 | -0.039145 | 14048 | 0.365532 |
+| best_busted_total_threshold_busted_total_22_to_26 | 100000 | 5136.5000 | -0.051365 | -0.042179 | 16029 | 0.338948 |
+| busted_total_22_to_27 | 100000 | 5136.5000 | -0.051365 | -0.042179 | 16029 | 0.338948 |
+| busted_total_22_to_28 | 100000 | 5136.5000 | -0.051365 | -0.042179 | 16029 | 0.338948 |
+| busted_total_22_to_29 | 100000 | 5136.5000 | -0.051365 | -0.042179 | 16029 | 0.338948 |
+| busted_total_22_to_30 | 100000 | 5136.5000 | -0.051365 | -0.042179 | 16029 | 0.338948 |
+| learned_busted_total_dealer | 100000 | 5337.0000 | -0.053370 | -0.043918 | 16029 | 0.356728 |
+| empirical_full_visible | 100000 | 2399.0000 | -0.023990 | -0.020504 | 6550 | 0.389695 |
 
 ## Mathematical and procedural issues discovered
 
