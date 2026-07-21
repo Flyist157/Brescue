@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "blackjack-rescue"
+version = "0.1.0"
+description = "Finite-shoe Monte Carlo simulator for the Blackjack Rescue variant"
+requires-python = ">=3.10"
+readme = "README.md"
+authors = [{ name = "Cursor Agent" }]
+dependencies = []
+
+[project.optional-dependencies]
+charts = ["matplotlib"]
+data = ["pandas"]
+
+[tool.setuptools.packages.find]
+include = ["blackjack_rescue*"]
