@@ -140,6 +140,7 @@ class SimulationMetrics:
         }
     )
     extra_casino_revenue_vs_never: float = 0.0
+    extra_dealer_actions_per_100_vs_never: float = 0.0
 
     def add_round_result(self, result: float) -> None:
         self.rounds += 1
@@ -264,7 +265,7 @@ class SimulationMetrics:
                 100 * opps / initial if initial else 0.0
             ),
             "estimated_extra_dealer_actions_per_100_hands": (
-                100 * self.dealer_cards_drawn / initial if initial else 0.0
+                self.extra_dealer_actions_per_100_vs_never
             ),
         }
 
@@ -288,6 +289,9 @@ class SimulationMetrics:
         self.rescued_final_losses += other.rescued_final_losses
         self.rescued_final_pushes += other.rescued_final_pushes
         self.dealer_cards_drawn += other.dealer_cards_drawn
+        self.extra_dealer_actions_per_100_vs_never += (
+            other.extra_dealer_actions_per_100_vs_never
+        )
         self.round_result_stats.merge(other.round_result_stats)
         self.rescue_incremental_stats.merge(other.rescue_incremental_stats)
         for key, value in other.state_groups.items():

@@ -125,9 +125,18 @@ def _set_relative_revenue(metrics: list[SimulationMetrics]) -> None:
     never = next((m for m in metrics if m.strategy_name == "never"), None)
     if never is None:
         return
+    never_dealer_actions = (
+        never.dealer_cards_drawn / never.initial_hands if never.initial_hands else 0.0
+    )
     for metric in metrics:
         metric.extra_casino_revenue_vs_never = (
             metric.casino_net_result - never.casino_net_result
+        )
+        dealer_actions = (
+            metric.dealer_cards_drawn / metric.initial_hands if metric.initial_hands else 0.0
+        )
+        metric.extra_dealer_actions_per_100_vs_never = (
+            100 * (dealer_actions - never_dealer_actions)
         )
 
 

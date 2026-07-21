@@ -31,9 +31,9 @@ class DealerPlayTests(unittest.TestCase):
     def test_dealer_hits_soft_17_when_configured(self) -> None:
         cfg = GameConfig(dealer_soft17=DealerSoft17Rule.HIT)
         metrics = SimulationMetrics(strategy_name="test")
-        shoe = Shoe(cfg, random.Random(1), cards=[Rank.FIVE], shuffle=False)
+        shoe = Shoe(cfg, random.Random(1), cards=[Rank.TEN], shuffle=False)
         cards = dealer_play([Rank.ACE, Rank.SIX], shoe, cfg, metrics)
-        self.assertEqual(cards, [Rank.ACE, Rank.SIX, Rank.FIVE])
+        self.assertEqual(cards, [Rank.ACE, Rank.SIX, Rank.TEN])
         self.assertEqual(metrics.dealer_cards_drawn, 1)
 
 

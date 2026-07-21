@@ -120,7 +120,7 @@ def settle_hand(
     player_total = hand.value()
     if dealer_total > 21 or player_total > dealer_total:
         if config.rescue_settlement_model == RescueSettlementModel.LIVE_SIDE_WAGER:
-            return hand.wager, FinalOutcome.WIN
+            return hand.wager + hand.rescue_fees, FinalOutcome.WIN
         return hand.wager - hand.rescue_fees, FinalOutcome.WIN
     if player_total < dealer_total:
         if config.rescue_settlement_model == RescueSettlementModel.LIVE_SIDE_WAGER:
