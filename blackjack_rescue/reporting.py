@@ -155,9 +155,9 @@ def write_markdown_report(
         fh.write("# Blackjack Rescue Simulation Report\n\n")
         fh.write("## Assumptions and configurable ambiguous rules\n\n")
         fh.write(
-            "- Rescue wager default: nonrefundable fee paid to replace the bust card.\n"
-            "- A rescued win pays only the original hand wager; default net is +0.5 units.\n"
-            "- A rescued push loses the Rescue fee; default net is -0.5 units.\n"
+            "- Rescue wager default: live side wager paid on rescued wins.\n"
+            "- A rescued win pays the original hand wager plus the Rescue wager; default net is +1.5 units.\n"
+            "- A rescued push returns both live wagers; default net is 0.0 units.\n"
             "- Rescue is allowed on split hands but not after doubled hands by default.\n"
             "- The bust-causing card is exposed, removed from the hand, and discarded.\n"
             "- The replacement is the next physical card in the finite shoe.\n"

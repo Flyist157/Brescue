@@ -1,8 +1,8 @@
 """Configuration for Blackjack Rescue.
 
 The dataclass below intentionally documents ambiguous commercial rules in one
-place.  Defaults implement the rule set requested for six-deck S17 DAS blackjack
-with a nonrefundable Rescue fee.
+place.  Defaults implement six-deck S17 DAS blackjack with a live Rescue wager
+that is paid on rescued wins.
 """
 
 from __future__ import annotations
@@ -27,12 +27,13 @@ class RescueSettlementModel(str, Enum):
     NONREFUNDABLE_FEE:
         The Rescue wager buys replacement of the bust card.  It is never paid
         back.  If the original wager later wins, loses, or pushes, the fee
-        remains lost.  This is the default model.
+        remains lost.
 
     LIVE_SIDE_WAGER:
         The Rescue amount is treated as an added live wager that follows the
         original hand result after a successful replacement.  Immediate
-        replacement bust loses both original action and the Rescue amount.
+        replacement bust loses both original action and the Rescue amount.  This
+        is the default model.
     """
 
     NONREFUNDABLE_FEE = "nonrefundable_fee"
@@ -52,10 +53,10 @@ class GameConfig:
 
     Ambiguous Rescue modeling rules are represented explicitly:
 
-    * ``rescue_settlement_model`` controls whether the Rescue wager is a
-      nonrefundable fee (default) or an additional live wager.
-    * ``rescued_win_pays_original_only`` is true for the default fee model: a
-      rescued ordinary win nets +1 original unit minus the Rescue fee.
+    * ``rescue_settlement_model`` controls whether the Rescue wager is an
+      additional live wager (default) or a nonrefundable fee.
+    * ``rescued_win_pays_original_only`` is false by default: a rescued ordinary
+      win nets the original wager plus the Rescue wager.
     * ``rescue_allowed_after_double`` defaults false.  If enabled, a declined
       doubled bust loses the doubled original action, and the Rescue fee is
       based on ``rescue_fee_base``.
@@ -88,9 +89,9 @@ class GameConfig:
     original_wager: float = 1.0
     rescue_cost: float = 0.5
     rescue_settlement_model: RescueSettlementModel = (
-        RescueSettlementModel.NONREFUNDABLE_FEE
+        RescueSettlementModel.LIVE_SIDE_WAGER
     )
-    rescued_win_pays_original_only: bool = True
+    rescued_win_pays_original_only: bool = False
     rescue_allowed_on_split_hands: bool = True
     rescue_allowed_after_double: bool = False
     rescue_fee_base: str = "original"  # "original" or "current_wager"

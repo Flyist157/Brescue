@@ -26,20 +26,20 @@ Defaults are documented in `blackjack_rescue/config.py` and mirrored in
 
 ## Rescue settlement assumption
 
-The default commercial model treats the Rescue wager as a nonrefundable fee:
+The default commercial model treats the Rescue wager as an additional live
+wager:
 
 - The bust-causing card is discarded.
 - The next physical card in the shoe replaces it.
-- The 0.5-unit Rescue fee is never returned.
-- The original wager resumes normal action after a successful replacement.
+- The 0.5-unit Rescue wager follows the rescued hand result.
 - Replacement bust: `-1.5` units.
 - Rescued hand later loses: `-1.5` units.
-- Rescued hand pushes: `-0.5` units.
-- Rescued hand wins normally: `+0.5` units.
-- A rescued 21 is not blackjack and pays as an ordinary win.
+- Rescued hand pushes: `0.0` units.
+- Rescued hand wins normally: `+1.5` units.
+- A rescued 21 is not blackjack and pays as an ordinary win on both live wagers.
 
-Alternative Rescue settlement is configurable with
-`rescue_settlement_model = "live_side_wager"`.
+The previous nonrefundable-fee treatment remains configurable with
+`rescue_settlement_model = "nonrefundable_fee"`.
 
 ## Installation
 

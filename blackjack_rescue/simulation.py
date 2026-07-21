@@ -362,7 +362,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--rescue-settlement-model",
         choices=[model.value for model in RescueSettlementModel],
-        default=RescueSettlementModel.NONREFUNDABLE_FEE.value,
+        default=RescueSettlementModel.LIVE_SIDE_WAGER.value,
     )
     parser.add_argument("--rescue-on-splits", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument(

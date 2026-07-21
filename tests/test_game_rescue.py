@@ -61,7 +61,7 @@ class SplitAndRescueTests(unittest.TestCase):
         )
         self.assertEqual(metrics.rescue_attempts, 1)
         self.assertEqual(metrics.rescue_immediate_successes, 1)
-        self.assertEqual(metrics.player_net_result, 0.5)
+        self.assertEqual(metrics.player_net_result, 1.5)
         event_group_keys = list(metrics.state_groups)
         self.assertTrue(any(key[5] == "2" for key in event_group_keys))
 
@@ -77,7 +77,7 @@ class SplitAndRescueTests(unittest.TestCase):
         metrics = run_fixed(
             [Rank.TEN, Rank.TEN, Rank.SIX, Rank.EIGHT, Rank.TEN, Rank.TWO]
         )
-        self.assertEqual(metrics.player_net_result, -0.5)
+        self.assertEqual(metrics.player_net_result, 0.0)
         self.assertEqual(metrics.rescued_final_pushes, 1)
 
     def test_successful_rescue_followed_by_loss(self) -> None:
